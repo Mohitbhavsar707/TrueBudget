@@ -56,7 +56,7 @@ def init_db() -> None:
     conn.close()
 
 
-# ---------- Income CRUD ----------
+#  Income CRUD 
 def add_income(name: str, amount: float, frequency: str) -> None:
     conn = get_conn()
     conn.execute(
@@ -81,7 +81,7 @@ def list_income() -> List[Dict[str, Any]]:
     return [dict(r) for r in rows]
 
 
-# ---------- Expense CRUD ----------
+#  Expense CRUD 
 def add_expense(name: str, amount: float, frequency: str, category: str) -> None:
     conn = get_conn()
     conn.execute(
@@ -106,7 +106,7 @@ def list_expenses() -> List[Dict[str, Any]]:
     return [dict(r) for r in rows]
 
 
-# ---------- Profile ----------
+#  Profile 
 def upsert_profile(location: Optional[str], savings_goal_type: str, savings_goal_value: float, focus_categories: str) -> None:
     conn = get_conn()
     conn.execute(

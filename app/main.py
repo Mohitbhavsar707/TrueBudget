@@ -27,7 +27,7 @@ init_db()
 st.title("TrueBudget (MVP) — Free Tools Only")
 st.caption("Streamlit + SQLite + Ollama (local LLM)")
 
-# ---------------- Sidebar: Profile / Goals ----------------
+# Sidebar: Profile / Goals
 with st.sidebar:
     st.header("Profile & Goals")
 
@@ -71,7 +71,7 @@ with st.sidebar:
     st.caption("If Ollama isn't detected, open the Ollama app and run: `ollama pull llama3.1:8b`")
 
 
-# ---------------- Main: Inputs ----------------
+# Main: Inputs 
 tab1, tab2, tab3 = st.tabs(["1) Inputs", "2) Dashboard", "3) Advice"])
 
 
@@ -142,7 +142,7 @@ with tab1:
             st.info("No fixed expenses yet.")
 
 
-# ---------------- Dashboard ----------------
+# Dashboard 
 with tab2:
     st.subheader("Monthly Dashboard")
 
@@ -214,7 +214,7 @@ with tab2:
     st.divider()
     st.markdown("### Visual breakdown (actually useful)")
 
-    # ---- Budget health metrics ----
+    #  Budget health metrics 
     def pct(n, d):
         return 0.0 if d <= 0 else (n / d) * 100.0
 
@@ -240,7 +240,7 @@ with tab2:
         else:
             st.success("Budget looks feasible. Next step: track actual spending vs targets.")
 
-    # ---- Chart 1: Donut chart for overall split ----
+    #  Chart 1: Donut chart for overall split 
     overall_df = pd.DataFrame([
         {"Bucket": "Fixed", "Amount": fixed_total},
         {"Bucket": "Savings", "Amount": savings_target},
@@ -256,7 +256,7 @@ with tab2:
     )
     st.plotly_chart(fig1, use_container_width=True)
 
-    # ---- Chart 2: Fixed expenses by category (if present) ----
+    #  Chart 2: Fixed expenses by category (if present) 
     if fixed_by_cat:
         fixed_cat_df = (
             pd.DataFrame([{"Category": k, "Monthly": v} for k, v in fixed_by_cat.items()])
@@ -270,7 +270,7 @@ with tab2:
         )
         st.plotly_chart(fig2, use_container_width=True)
 
-    # ---- Chart 3: Variable targets sorted (the “spending plan”) ----
+    #  Chart 3: Variable targets sorted (the “spending plan”) 
     var_df = (
         pd.DataFrame([{"Category": k, "Target": v} for k, v in variable_alloc.items()])
         .sort_values("Target", ascending=False)
@@ -284,7 +284,7 @@ with tab2:
     st.plotly_chart(fig3, use_container_width=True)
         
 
-# ---------------- Advice ----------------
+#  Advice 
 with tab3:
     st.subheader("Advice (LLM-powered, local & free)")
 
@@ -333,7 +333,6 @@ with tab3:
             with st.spinner("Thinking..."):
                 try:
                     advice = generate_advice(payload, model=model.strip() or DEFAULT_MODEL)
-                    # Clean weird invisible characters that can mess up rendering
                     cleaned = (
                         advice.replace("\u200b", "")   # zero-width space
                             .replace("\u200c", "")   # zero-width non-joiner
