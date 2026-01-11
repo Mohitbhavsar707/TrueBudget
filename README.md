@@ -37,20 +37,34 @@ No external APIs or cloud services are required.
 ## How to Run the Project
 
 ### 1. Clone the repository
+```
 git clone https://github.com/YOURUSERNAME/TrueBudget.git
 cd TrueBudget
+```
+
 
 ### 2. Clone the repository
+```
 Create a virtual environment
 python3 -m venv .venv
 source .venv/bin/activate
+```
+
 
 ### 3. Install dependencies
+```
 pip install -r requirements.txt
+```
+
 
 ### 4. Install Ollama and a model
+```
 brew install --cask ollama
 ollama pull llama3.1:8b
+```
 
 ### 5. Run the app
+```
 streamlit run app/main.py
+```
+
